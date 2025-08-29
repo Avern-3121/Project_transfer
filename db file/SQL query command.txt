@@ -1,0 +1,23 @@
+
+UPDATE entry_trucks_info
+SET loading_weight=out_weight - in_weight WHERE status=1;
+
+SELECT * FROM entry_trucks_info;
+
+DELIMITER //
+CREATE PROCEDURE update_loading_weight (IN loading_weight INT)
+BEGIN
+    UPDATE entry_trucks_info
+    SET loading_weight=out_weight - in_weight WHERE status=1;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE TRIGGER update_loading_weight
+AFTER UPDATE ON entry_trucks_info
+FOR EACH ROW
+BEGIN
+    CALL update_loading_weight();
+END //
+DELIMITER ;
