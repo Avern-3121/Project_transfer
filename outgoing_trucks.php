@@ -55,6 +55,25 @@
                         <table id="example" class="table table-striped table-hover table-bordered" style="width:100%">
                         
         <thead>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-body">
+
+                        <!-- ===== Filter Date ===== -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label>ເລີ່ມວັນທີ:</label>
+                                <input type="date" id="min-date" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label>ຫາວັນທີ:</label>
+                                <input type="date" id="max-date" class="form-control">
+                            </div>
+                        </div>
+                        <!-- ======================= -->
+
+                        <table id="example" class="table table-striped table-hover table-bordered" style="width:100%">
             <tr>
                 <th>ລໍາດັບ</th>
                 <th>ປ້າຍລົດທາງໜ້າ</th>
@@ -131,6 +150,41 @@
 		});
 };
 	</script>
+	<!-- ===== Date Filter Script ===== -->
+    <script>
+    $(document).ready(function() {
+        var table = $('#example').DataTable();
+
+        // เพิ่ม filter function
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                var min = $('#min-date').val();
+                var max = $('#max-date').val();
+                var date = data[6]; // index 6 = ເວລາລົດເຂົ້າ
+
+                if (!date) return true;
+
+                var dateObj = new Date(date);
+                var minDate = min ? new Date(min) : null;
+                var maxDate = max ? new Date(max) : null;
+
+                if ((minDate === null && maxDate === null) ||
+                    (minDate === null && dateObj <= maxDate) ||
+                    (minDate <= dateObj && maxDate === null) ||
+                    (minDate <= dateObj && dateObj <= maxDate)) {
+                    return true;
+                }
+                return false;
+            }
+        );
+
+        // redraw เมื่อเลือกวันที่
+        $('#min-date, #max-date').on('change', function() {
+            table.draw();
+        });
+    });
+    </script>
+    <!-- ============================ -->
 
     <script>
         $(document).ready(function() {
