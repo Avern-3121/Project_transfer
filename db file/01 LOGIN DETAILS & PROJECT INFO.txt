@@ -1,0 +1,13 @@
+**Database Name: parking**
+
+**Login Details**
+
+create database parking default character set utf8 collate utf8_general_ci;
+mysql -u root -p parking < parking.sql
+
+Username: admin
+Password: Password@123
+
+
+
+

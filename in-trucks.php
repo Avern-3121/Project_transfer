@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	error_reporting(0);
-	include('includes/dbconn.php');
+	include_once 'includes/dbconn.php';
 	if (strlen($_SESSION['vpmsaid']==0)) {
 	header('location:logout.php');
 	} else {  ?>
@@ -18,7 +18,7 @@
 			echo "<script>alert('ລາຍລະອຽດຂອງລົດເຂົ້າ ໄດ້ຖືກເພີ່ມແລ້ວ');</script>";
 			echo "<script>window.location.href ='truck_dashboard.php'</script>";
 		} else {
-			echo "<script>alert('ມີບາງຢ່າງຜິດພາດ');</script>";       
+			echo "<script>alert('ມີບາງຢ່າງຜິດພາດ');</script>";
 		}
 	}
   ?>
@@ -64,7 +64,7 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<!-- <h1 class="page-header">Vehicle Management</h1> -->
+
 			</div>
 		</div><!--/.row-->
 		
